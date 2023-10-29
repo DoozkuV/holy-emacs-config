@@ -21,6 +21,14 @@
 (recentf-mode 1) ; Enable file history
 (global-set-key (kbd "C-c C-r") 'recentf)
 
+;;; ELECTRIC PAIR MODE
+(dolist (mode '(prog-mode-hook
+		eshell-mode-hook
+		vterm-mode-hook
+		term-mode-hook
+		shell-mode-hook))
+  (add-hook mode (lambda () (electric-pair-local-mode 1))))
+
 ;;; VERTICO COMPLETION
 (use-package vertico
   :diminish
@@ -47,6 +55,7 @@
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
+
 ;;; CORFU COMPLETION
 (use-package corfu
   :custom
@@ -68,6 +77,13 @@
   ;; Save completion history for better sorting
   (corfu-history-mode))
 
+;;; AVY NAVIGATION
+(use-package avy
+  :bind
+  ("C-:" . avy-goto-char)
+  ("C-'" . avy-goto-char-2)
+  ("M-g g" . avy-goto-line)
+  ("M-g w" . avy-goto-word-1))
 ;;; WHICH KEY
 (use-package which-key
   :init (which-key-mode)
