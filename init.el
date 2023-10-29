@@ -90,6 +90,7 @@
   ("C-:" . avy-goto-char)
   ("C-'" . avy-goto-char-2)
   ("M-g g" . avy-goto-line)
+  ("M-g M-g" . avy-goto-line)
   ("M-g w" . avy-goto-word-1))
 ;;; WHICH KEY
 (use-package which-key
@@ -129,7 +130,23 @@
          :engines (list (gts-bing-engine) (gts-google-engine))
          :render (gts-buffer-render))))
 
+(defun gp/kill-all-buffers ()
+  "Kills every buffer in the buffer list and then opens the scratch buffer."
+  (interactive)
+  (save-some-buffers)
+  (mapcar 'kill-buffer (buffer-list))
+  (delete-other-windows))
+(keymap-global-set "C-c C-k" 'gp/kill-all-buffers)
+
+(defun gp/arch-update ()
+  "Runs the Yay shell command to automatically update the system on Arch Linux"
+  (interactive)
+  (async-shell-command "yay -Syu"))
+(keymap-global-set "C-c C-u" 'gp/arch-update)
+
 ;;; THEMEING
+;; This is at the end of the config because it is the least important
+;; thing to perserve if something in this config breaks 
 (pixel-scroll-mode 1)
 (pixel-scroll-precision-mode 1)
 (scroll-bar-mode -1)
