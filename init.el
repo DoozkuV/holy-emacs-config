@@ -17,6 +17,10 @@
   (package-install 'use-package))
 (eval-when-compile (require 'use-package))
 
+;;; RECENTF
+(recentf-mode 1) ; Enable file history
+(global-set-key (kbd "C-c C-r") 'recentf)
+
 ;;; VERTICO COMPLETION
 (use-package vertico
   :diminish
@@ -74,10 +78,12 @@
   (setq which-key-idle-delay 0.25))
 
 ;;; MAGIT
+;; See https://magit.vc/manual/magit/Global-Bindings.html for info regarding binds
 (use-package magit
   :commands (magit-status magit-dispatch magit-file-dispatch)
   :config
   (setq magit-define-global-key-bindings 'recommended))
+
 ;;; THEMEING
 (pixel-scroll-mode 1)
 (pixel-scroll-precision-mode 1)
