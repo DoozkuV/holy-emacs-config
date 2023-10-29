@@ -77,12 +77,31 @@
   :config
   (setq which-key-idle-delay 0.25))
 
+(use-package helpful
+  :bind
+  ([remap describe-function] . helpful-callable)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-variable] . helpful-variable)
+  ([remap describe-key] . helpful-key))
+
 ;;; MAGIT
 ;; See https://magit.vc/manual/magit/Global-Bindings.html for info regarding binds
 (use-package magit
   :commands (magit-status magit-dispatch magit-file-dispatch)
   :config
   (setq magit-define-global-key-bindings 'recommended))
+;;; UTILITIES
+(use-package go-translate
+  :bind
+  ("C-c t" . gts-do-translate)
+  :config
+  (setq gts-translate-list '(("it" "en") ("en" "it")))
+
+  (setq gts-default-translator
+        (gts-translator
+         :picker (gts-prompt-picker)
+         :engines (list (gts-bing-engine) (gts-google-engine))
+         :render (gts-buffer-render))))
 
 ;;; THEMEING
 (pixel-scroll-mode 1)
