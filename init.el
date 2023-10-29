@@ -86,12 +86,15 @@
 
 ;;; AVY NAVIGATION
 (use-package avy
+  :custom
+  (avy-keys '(?s ?a ?d ?f ?j ?k ?l ?e ?w ?c ?m ?p ?g ?h))
   :bind
   ("C-:" . avy-goto-char)
   ("C-'" . avy-goto-char-2)
   ("M-g g" . avy-goto-line)
   ("M-g M-g" . avy-goto-line)
   ("M-g w" . avy-goto-word-1))
+
 ;;; WHICH KEY
 (use-package which-key
   :init (which-key-mode)
@@ -117,6 +120,22 @@
   ("C-c g" . magit-dispatch)
   ("C-c f" . magit-file-dispatch))
 
+;;; TERMINAL CONFIGURATRION
+;; Vterm
+(use-package vterm
+  :commands vterm
+  :bind
+  ("C-c o t" . vterm)
+  :config
+  (setq vterm-shell "fish")
+  (setq vterm-max-scrollback 10000))
+
+
+;;; PROGRAMMING
+;; Fish mode configuration
+(use-package fish-mode
+  :hook (fish-mode . (lambda ()
+		       (add-hook 'before-save-hook 'fish_indent-before-save))))
 ;;; UTILITIES
 (use-package go-translate
   :bind
