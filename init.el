@@ -19,15 +19,22 @@
 
 ;;; RECENTF
 (recentf-mode 1) ; Enable file history
-(global-set-key (kbd "C-c C-r") 'recentf)
+(keymap-global-set "C-c C-r" 'recentf)
 
 ;;; ELECTRIC PAIR MODE
+;; Enable it for programming buffers 
 (dolist (mode '(prog-mode-hook
 		eshell-mode-hook
 		vterm-mode-hook
 		term-mode-hook
 		shell-mode-hook))
   (add-hook mode (lambda () (electric-pair-local-mode 1))))
+
+;;; AUTO FILL MODE
+(dolist (mode '(org-mode-hook
+		text-mode-hook))
+  (add-hook mode (lambda () (auto-fill-mode 1))))
+
 
 ;;; VERTICO COMPLETION
 (use-package vertico
@@ -104,8 +111,11 @@
 ;; See https://magit.vc/manual/magit/Global-Bindings.html for info regarding binds
 (use-package magit
   :commands (magit-status magit-dispatch magit-file-dispatch)
-  :config
-  (setq magit-define-global-key-bindings 'recommended))
+  :bind
+  ("C-x g" . magit-status)
+  ("C-c g" . magit-dispatch)
+  ("C-c f" . magit-file-dispatch))
+
 ;;; UTILITIES
 (use-package go-translate
   :bind

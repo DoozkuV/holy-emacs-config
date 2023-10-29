@@ -1,0 +1,20 @@
+* Holy Emacs Config
+Hello! This is a base setup for a new emacs configuration that I am
+working on based off of my previous configuration. However, I have
+decided to purge this config from all that is evil. The standard Emacs
+bindings are actually quite nice - and I find them much more
+convenient than constantly having to switch between different modes in
+Vim. Plus, this config is much smaller and more minimal than any
+configuration using Evil - which is amazing for performance and
+startup speed! 
+** WIP
+This project is very much a work in progress: The following is a todo
+list of what needs to be finished
+- [ ] Add mu and mu4e support
+- [ ] Configure org mode
+- [ ] Look into getting a literate config
+- [ ] Set up hydras for font size and window size
+- [ ] Look into getting a literate configuration up
+- [ ] Add Org-Roam
+- [ ] Add utility functions like Arch Update (I use arch btw)
+- [ ] Figure out what to have as a start screen/dashboard
