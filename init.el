@@ -188,6 +188,18 @@ emphasis markers inside of org mode"
 	   :clock-in :clock-resume
 	   :empty-lines 1))))
 
+;; Org roam configuration
+(use-package org-roam
+  :after org
+  :commands (org-roam-node-insert org-roam-node-find org-roam-capture)
+  :bind
+  ("C-c r c" . org-roam-node-capture)
+  ("C-c r f" . org-roam-node-find)
+  ("C-c r i" . org-roam-node-insert)
+  :config
+  (setq org-roam-directory (file-truename (concat gp/org-directory "/roam")))
+  (org-roam-db-autosync-mode))
+
 ;;; UTILITIES
 (use-package go-translate
   :bind
