@@ -1,3 +1,7 @@
+;; Setup to make emacs startup significantly faster
+;; This is later dialed back at the end of the config
+(setq gc-cons-threshold (* 50 1000 1000))
+
 ;;; BASIC INITALIZATION
 (setq user-mail-address "georgenpadron@gmail.com")
 (global-auto-revert-mode 1) ; Revert buffers when underlying file changes
@@ -289,4 +293,6 @@ emphasis markers inside of org mode"
    kept-new-versions 6
    kept-old-versions 2
    version-control t)) ; use versioned backups 
-    
+
+;; Bring back the GC Threshold for runtime performance
+(setq gc-cons-threshold (* 2 1000 1000))
