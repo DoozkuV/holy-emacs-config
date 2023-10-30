@@ -143,7 +143,8 @@ emphasis markers inside of org mode"
   (interactive)
   (message "org-hide-emphasis-markers=%s"
 	   (setq org-hide-emphasis-markers (not org-hide-emphasis-markers))))
-
+(defvar gp/org-directory "~/Documents/org"
+  "The directory where this configuration's org files will be stored")
 (use-package org
   :config
   ;; Make it so org mode always starts folded
@@ -159,7 +160,7 @@ emphasis markers inside of org mode"
 
   ;; Where org mode looks for agenda files
   (setq org-agenda-files
-	'("~/Documents/org"))
+	`(,gp/org-directory))
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
   ;; Custom org links are set here
@@ -175,10 +176,10 @@ emphasis markers inside of org mode"
   ;; Template for org capture
   (setq org-capture-templates
 	`(("t" "Tasks / Projects")
-	  ("tt" "Task" entry (file+olp ,(concat org-agenda-files "/tasks.org") "Inbox")
+	  ("tt" "Task" entry (file+olp ,(concat gp/org-directory "/tasks.org") "Inbox")
 	   "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
 	  ("j" "Journal" entry
-	   (file+olp+datetree ,(concat org-agenda-files "/journal.org"))
+	   (file+olp+datetree ,(concat gp/org-directory "/journal.org"))
 	   "* %<%I:%M %p> - Journal :journal:\n\n%?\n"
 	   :clock-in :clock-resume
 	   :empty-lines 1))))
