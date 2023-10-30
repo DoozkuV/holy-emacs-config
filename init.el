@@ -206,7 +206,8 @@ emphasis markers inside of org mode"
   (setq org-roam-directory (file-truename (concat gp/org-directory "/roam")))
   (org-roam-db-autosync-mode))
 
-;;; EMAIL(use-package mu4e
+;;; EMAIL
+(use-package mu4e
   ;; Mu is a package installed /outside/ of emacs
   :ensure nil
   :config
