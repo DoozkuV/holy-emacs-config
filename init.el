@@ -130,6 +130,7 @@
   :commands vterm
   :bind
   ("C-c o t" . vterm)
+  ("C-x 4 t" . vterm-other-window)
   :config
   (setq vterm-shell "fish")
   (setq vterm-max-scrollback 10000))
@@ -140,6 +141,11 @@
 (use-package fish-mode
   :hook (fish-mode . (lambda ()
 		       (add-hook 'before-save-hook 'fish_indent-before-save))))
+
+;; Yuck-mode for editing eww config files
+(use-package yuck-mode
+  :mode ("\\.yuck\\'" . yuck-mode))
+
 ;;; ORG MODE
 (defun gp/org-toggle-emphasis-markers ()
   "Toggles the 'org-hide-emphasis-markers' variable, effectively toggling whether or not to hide
@@ -200,6 +206,95 @@ emphasis markers inside of org mode"
   (setq org-roam-directory (file-truename (concat gp/org-directory "/roam")))
   (org-roam-db-autosync-mode))
 
+;;; EMAIL
+(use-package mu4e
+  :ensure nil
+  :config
+  ;; This is set to 't' to avoid mail syncing issues when using mbsync
+  (setq mu4e-change-filenames-when-moving t)
+
+  ;; Referesh mail using isync every 10 minutes
+  (setq mu4e-update-interval (* 10 60))
+  (setq mu4e-get-mail-command "mbsync -a")
+  (setq mu4e-maildir "~/Mail")
+
+  ;; Configure the function to be used for sending mail
+  (setq message-send-mail-function 'smtpmail-send-it)
+
+  (setq mu4e-contexts
+        (list
+         ;; Personal Account
+         (make-mu4e-context
+          :name "Professional"
+          :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "georgenpadron@gmail.com")
+                  (user-full-name . "George N Padron")
+                  (smtpmail-smtp-server . "smtp.gmail.com")
+                  (smtpmail-smtp-service . 465)
+                  (smtpmail-stream-type . ssl)
+                  (mu4e-drafts-folder . "/Gmail/[Gmail]/Drafts")
+                  (mu4e-sent-folder . "/Gmail/[Gmail]/Sent Mail")
+                  (mu4e-refile-folder . "/Gmail/[Gmail]/All Mail")
+                  (mu4e-trash-folder . "/Gmail/[Gmail]/Trash")
+                  (mu4e-maildir-shortcuts .
+                                          (("/Gmail/Inbox" . ?i)
+                                           ("/Gmail/[Gmail]/Sent Mail" . ?s)
+                                           ("/Gmail/[Gmail]/Trash" . ?t)
+                                           ("/Gmail/[Gmail]/Drafts" . ?d)
+                                           ("/Gmail/[Gmail]/All Mail" . ?a)))
+                  ))
+
+         ;; Wealth Account
+         (make-mu4e-context
+          :name "Wealth"
+          :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/Wealth" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "wealth2005@gmail.com")
+                  (user-full-name . "George N Padron")
+                  (smtpmail-smtp-server . "smtp.gmail.com")
+                  (smtpmail-smtp-service . 465)
+                  (smtpmail-stream-type . ssl)
+                  (mu4e-drafts-folder . "/Wealth/[Gmail]/Drafts")
+                  (mu4e-sent-folder . "/Wealth/[Gmail]/Sent Mail")
+                  (mu4e-refile-folder . "/Wealth/[Gmail]/All Mail")
+                  (mu4e-trash-folder . "/Wealth/[Gmail]/Trash")
+                  (mu4e-maildir-shortcuts .
+                                          (("/Wealth/Inbox" . ?i)
+                                           ("/Wealth/[Gmail]/Sent Mail" . ?s)
+                                           ("/Wealth/[Gmail]/Trash" . ?t)
+                                           ("/Wealth/[Gmail]/Drafts" . ?d)
+                                           ("/Wealth/[Gmail]/All Mail" . ?a)))
+                  ))
+         ;; Vanderbilt Account
+         (make-mu4e-context
+          :name "Vanderbilt"
+          :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/Vanderbilt" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "george.n.padron@vanderbilt.edu")
+                  (user-full-name . "George N Padron")
+                  (smtpmail-smtp-server . "smtp.gmail.com")
+                  (smtpmail-smtp-service . 465)
+                  (smtpmail-stream-type . ssl)
+                  (mu4e-drafts-folder . "/Vanderbilt/[Gmail]/Drafts")
+                  (mu4e-sent-folder . "/Vanderbilt/[Gmail]/Sent Mail")
+                  (mu4e-refile-folder . "/Vanderbilt/[Gmail]/All Mail")
+                  (mu4e-trash-folder . "/Vanderbilt/[Gmail]/Trash")
+                  (mu4e-maildir-shortcuts .
+                                          (("/Vanderbilt/Inbox" . ?i)
+                                           ("/Vanderbilt/[Gmail]/Sent Mail" . ?s)
+                                           ("/Vanderbilt/[Gmail]/Trash" . ?t)
+                                           ("/Vanderbilt/[Gmail]/Drafts" . ?d)
+                                           ("/Vanderbilt/[Gmail]/All Mail" . ?a)))
+                  ))
+         ))
+  )
 ;;; UTILITIES
 (use-package go-translate
   :bind
@@ -212,6 +307,9 @@ emphasis markers inside of org mode"
          :picker (gts-prompt-picker)
          :engines (list (gts-bing-engine) (gts-google-engine))
          :render (gts-buffer-render))))
+
+(use-package password-store
+  :defer)
 
 (defun gp/kill-all-buffers ()
   "Kills every buffer in the buffer list and then opens the scratch buffer."
