@@ -136,6 +136,53 @@
 (use-package fish-mode
   :hook (fish-mode . (lambda ()
 		       (add-hook 'before-save-hook 'fish_indent-before-save))))
+;;; ORG MODE
+(defun gp/org-toggle-emphasis-markers ()
+  "Toggles the 'org-hide-emphasis-markers' variable, effectively toggling whether or not to hide
+emphasis markers inside of org mode"
+  (interactive)
+  (message "org-hide-emphasis-markers=%s"
+	   (setq org-hide-emphasis-markers (not org-hide-emphasis-markers))))
+
+(use-package org
+  :config
+  ;; Make it so org mode always starts folded
+  (setq org-startup-folded t)
+  ;; Change how org folds display when minimized
+  (setq org-ellipsis " ▾"
+	org-hide-emphasis-markers t)
+
+  ;; Basisc org agenda setup
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+
+  ;; Where org mode looks for agenda files
+  (setq org-agenda-files
+	'("~/Documents/org"))
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+
+  ;; Custom org links are set here
+  (setq org-link-abbrev-alist
+	'(("spellwiki" . "http://dnd5e.wikidot.com/spell:")))
+  ;; Custom todo keywords
+  (setq org-todo-keywords
+	'((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")))
+  (setq org-refile-targets
+	'(("archive.org" :maxlevel . 1)
+	  ("tasks.org" :maxlevel . 1)))
+
+  ;; Template for org capture
+  (setq org-capture-templates
+	`(("t" "Tasks / Projects")
+	  ("tt" "Task" entry (file+olp ,(concat org-agenda-files "/tasks.org") "Inbox")
+	   "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
+	  ("j" "Journal" entry
+	   (file+olp+datetree ,(concat org-agenda-files "/journal.org"))
+	   "* %<%I:%M %p> - Journal :journal:\n\n%?\n"
+	   :clock-in :clock-resume
+	   :empty-lines 1))))
+
 ;;; UTILITIES
 (use-package go-translate
   :bind
