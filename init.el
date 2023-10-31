@@ -34,7 +34,7 @@
 ;; Add in the load directory path
 (load (config-path-concat "load-directory"))
 (load-directory (config-path-concat "productivity"))
-(load-directory (config-path-concat "theme")) ;; Load the theme after to avoid bugginessq
+(load-directory (config-path-concat "theme")) ;; Load the theme after to avoid bugginess
 
 ;; Bring back the GC Threshold for runtime performance
 (setq gc-cons-threshold (* 2 1000 1000))

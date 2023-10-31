@@ -14,5 +14,5 @@
 ;;;###autoload
 (defun gp/arch-install (program)
   "Runs the Yay shell command to install the inputted program"
-  (interactive "DProgram Name: ")
+  (interactive "MProgram Name: ")
   (async-shell-command (format "sudo pacman -S %s" program)))
