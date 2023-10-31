@@ -52,7 +52,7 @@ emphasis markers inside of org mode"
 
 ;; Org roam configuration
 (use-package org-roam
-  :after org
+  ;; :after org
   :commands (org-roam-node-insert org-roam-node-find org-roam-capture)
   :bind
   ("C-c r c" . org-roam-capture)
