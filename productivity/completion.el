@@ -31,6 +31,14 @@
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 ;;; CORFU COMPLETION
+
+;; Func to define corfu functionality in shells
+(defun corfu-shell-functionality ()
+  (setq-local corfu-quit-at-boundary t
+	      corfu-quit-no-match t
+	      corfu-auto nil)
+  (corfu-mode))
+
 (use-package corfu
   :custom
   (corfu-cycle t) ; Allows cycling through candidates
@@ -49,7 +57,10 @@
   ;; Use corfu everywhere
   (global-corfu-mode)
   ;; Save completion history for better sorting
-  (corfu-history-mode))
+  (corfu-history-mode)
+  :config
+  (add-hook 'eshell-mode-hook 'corfu-shell-functionality)
+  (add-hook 'shell-mode-hook 'corfu-shell-functionality))
 
 ;;; EMBARK
 (use-package embark

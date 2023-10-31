@@ -12,8 +12,9 @@ This project is very much a work in progress: The following is a todo
 list of what needs to be finished
 - [X] Add mu and mu4e support
 - [X] Configure org mode
-- [ ] Look into getting a literate config
-- [ ] Set up hydras for font size and window size
+- [X] Look into getting a literate config
+  - Done: Simply used multi-file config
+- [X] Set up hydras for font size and window size
 - [X] Add Org-Roam
 - [X] Add utility functions like Arch Update (I use arch btw)
 - [ ] Figure out what to have as a start screen/dashboard

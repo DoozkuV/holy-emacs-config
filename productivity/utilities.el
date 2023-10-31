@@ -2,6 +2,10 @@
 (recentf-mode 1) ; Enable file history
 (keymap-global-set "C-c C-r" 'recentf)
 
+;;; STARTUP BUFFER
+(setq inhibit-splash-screen t
+      initial-buffer-choice nil)
+
 ;;; ELECTRIC PAIR MODE
 ;; Enable it for programming buffers 
 (dolist (mode '(prog-mode-hook
