@@ -10,11 +10,11 @@ startup speed!
 ** WIP
 This project is very much a work in progress: The following is a todo
 list of what needs to be finished
-- [ ] Add mu and mu4e support
-- [ ] Configure org mode
+- [X] Add mu and mu4e support
+- [X] Configure org mode
 - [ ] Look into getting a literate config
 - [ ] Set up hydras for font size and window size
-- [ ] Look into getting a literate configuration up
-- [ ] Add Org-Roam
-- [ ] Add utility functions like Arch Update (I use arch btw)
+- [X] Add Org-Roam
+- [X] Add utility functions like Arch Update (I use arch btw)
 - [ ] Figure out what to have as a start screen/dashboard
+  

@@ -87,7 +87,18 @@
   (global-corfu-mode)
   ;; Save completion history for better sorting
   (corfu-history-mode))
-
+;;; EMBARK
+(use-package embark
+  :bind
+  ("C-." . embark-act)
+  ("C-;" . embark-dwim)
+  ("C-h B" . embark-bindings)
+  :config
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
 ;;; AVY NAVIGATION
 (use-package avy
   :custom
@@ -153,9 +164,13 @@ emphasis markers inside of org mode"
   (interactive)
   (message "org-hide-emphasis-markers=%s"
 	   (setq org-hide-emphasis-markers (not org-hide-emphasis-markers))))
+
 (defvar gp/org-directory "~/Documents/org"
   "The directory where this configuration's org files will be stored")
 (use-package org
+  :bind
+  ("C-c o c" . org-capture)
+  ("C-c o a" . org-agenda)
   :config
   ;; Make it so org mode always starts folded
   (setq org-startup-folded t)
@@ -199,7 +214,7 @@ emphasis markers inside of org mode"
   :after org
   :commands (org-roam-node-insert org-roam-node-find org-roam-capture)
   :bind
-  ("C-c r c" . org-roam-node-capture)
+  ("C-c r c" . org-roam-capture)
   ("C-c r f" . org-roam-node-find)
   ("C-c r i" . org-roam-node-insert)
   :config
@@ -210,6 +225,8 @@ emphasis markers inside of org mode"
 (use-package mu4e
   ;; Mu is a package installed /outside/ of emacs
   :ensure nil
+  :bind
+  ("C-c o m" . mu4e)
   :config
   ;; This is set to 't' to avoid mail syncing issues when using mbsync
   (setq mu4e-change-filenames-when-moving t
@@ -221,14 +238,25 @@ emphasis markers inside of org mode"
   (setq mu4e-update-interval (* 10 60)
         mu4e-get-mail-command "mbsync -a"
         mu4e-maildir "~/.local/share/mail")
+  ;; (auth-source-pass-enable)
+  ;; (setq auth-source-do-cache nil
+  ;; 	auth-sources '("~/.password-store/smtp.gmail.com/georgenpadron@gmail.com.gpg"))
+  
+    ;; Configure mail sending to use msmtp
+  ;; (setq sendmail-program (executable-find "msmtp")
+  ;;       send-mail-function #'smtpmail-send-it
+  ;;       message-sendmail-f-is-evil t
+  ;;       message-sendmail-extra-arguments '("--read-envelope-from")
+  ;;       message-send-mail-function #'message-send-mail-with-sendmail)
 
-  ;; Configure mail sending to use msmtp
-  (setq sendmail-program (executable-find "msmtp")
-        send-mail-function #'smtpmail-send-it
-        message-sendmail-f-is-evil t
-        message-sendmail-extra-arguments '("--read-envelope-from")
-        message-send-mail-function #'message-send-mail-with-sendmail)
-
+  ;; Configuring SMTP to work properly with gmail
+  (setq message-send-mail-function 'smtpmail-send-it
+	starttls-use-gnutls t
+	smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+	smtpmail-smtp-server "smtp.gmail.com"
+	smtpmail-default-smtp-server "smtp.gmail.com"
+	smtpmail-smtp-service 587)
+  
   (setq mu4e-contexts
         (list
          ;; Personal Account
@@ -253,7 +281,8 @@ emphasis markers inside of org mode"
                                            ("/georgenpadron@gmail.com/[Gmail]/Trash" . ?t)
                                            ("/georgenpadron@gmail.com/[Gmail]/Drafts" . ?d)
                                            ("/georgenpadron@gmail.com/[Gmail]/All Mail" . ?a)))
-                  ))
+		  (smtpmail-mail-address . "georgenpadron@gmail.com")
+		  (smtpmail-smtp-user . "georgenpadron@gmail.com")))
 
          ;; Wealth Account
          (make-mu4e-context
@@ -277,7 +306,10 @@ emphasis markers inside of org mode"
                                            ("/wealth2005@gmail.com/[Gmail]/Trash" . ?t)
                                            ("/wealth2005@gmail.com/[Gmail]/Drafts" . ?d)
                                            ("/wealth2005@gmail.com/[Gmail]/All Mail" . ?a)))
-                  ))
+		  (smtpmail-mail-address . "wealth2005@gmail.com")
+		  (smtpmail-auth-credentials .
+		   '(("smtp.gmail.com" 587 "wealth2005@gmail.com" nil)))))
+
          ;; george.n.padron@vanderbilt.edu Account
          (make-mu4e-context
           :name "Vanderbilt"
@@ -300,14 +332,18 @@ emphasis markers inside of org mode"
                                            ("/george.n.padron@vanderbilt.edu/[Gmail]/Trash" . ?t)
                                            ("/george.n.padron@vanderbilt.edu/[Gmail]/Drafts" . ?d)
                                            ("/george.n.padron@vanderbilt.edu/[Gmail]/All Mail" . ?a)))
-                  ))
-         ))
-  )
+                  		  (smtpmail-auth-credentials .
+		   '(("smtp.gmail.com" 587 "georgenpadron@gmail.com" nil))))))))
 
 ;;; UTILITIES
+;; PDF Reader
+(use-package pdf-tools
+  :init
+  (pdf-loader-install))
+
 (use-package go-translate
   :bind
-  ("C-c t" . gts-do-translate)
+  ("C-c o r" . gts-do-translate)
   :config
   (setq gts-translate-list '(("it" "en") ("en" "it")))
 
@@ -349,6 +385,12 @@ emphasis markers inside of org mode"
 (tooltip-mode -1)
 (menu-bar-mode -1)
 (setq use-dialog-box nil)
+
+;; Tab configuration
+(setq tab-bar-show 1 ; Show tab bar only when more than 1 tab present
+      tab-bar-new-button-show nil ; Disable new and cose button on tab bar
+      tab-bar-close-button-show nil
+      tab-bar-auto-width t) ; Static tab bar with if true
 ;; Set up catppuccin theme 
 (use-package catppuccin-theme
   :init (setq catppuccin-flavor 'mocha)
