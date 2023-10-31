@@ -93,4 +93,4 @@
                                            ("/george.n.padron@vanderbilt.edu/[Gmail]/Drafts" . ?d)
                                            ("/george.n.padron@vanderbilt.edu/[Gmail]/All Mail" . ?a)))
 		  (smtpmail-mail-address . "george.n.padron@vanderbilt.edu")
-		  (smtpmail-smtp-user . "george.n.padron@vanderbilt.edu")))))
+		  (smtpmail-smtp-user . "george.n.padron@vanderbilt.edu"))))))

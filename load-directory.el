@@ -1,5 +1,4 @@
 ;;; This function
-;;;###autoload 
 (defun load-directory (directory)
   (require 'find-lisp)
   (mapcar (lambda (fn)
