@@ -12,6 +12,7 @@
   ;; Referesh mail using isync every 10 minutes
   ;; NOTE: This is disabled in this config as this is being handled instead
   ;; by a bash script
+  (auth-source-pass-enable)
   (setq mu4e-update-interval (* 10 60)
         mu4e-get-mail-command "mbsync -a"
         mu4e-maildir "~/.local/share/mail")
