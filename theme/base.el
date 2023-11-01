@@ -35,5 +35,6 @@
                 doc-view-mode-hook
                 image-minor-mode-hook
                 pdf-tools-enabled-hook
+		eww-mode-hook
                 mu4e-main-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))

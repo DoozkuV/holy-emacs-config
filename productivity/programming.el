@@ -7,3 +7,6 @@
 ;; Yuck-mode for editing eww config files
 (use-package yuck-mode
   :mode ("\\.yuck\\'" . yuck-mode))
+
+;; Editting Yaml files
+(use-package yaml-mode)
