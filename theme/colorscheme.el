@@ -4,7 +4,7 @@
 ;; mayhaps something with 'pywal'?
 
 ;; Set up catppuccin theme 
-(use-package catppuccin-theme
-  :init (setq catppuccin-flavor 'mocha)
-  (load-theme 'catppuccin :no-confirm))
-
+;; (use-package catppuccin-theme
+;;   :init (setq catppuccin-flavor 'mocha)
+;;   (load-theme 'catppuccin :no-confirm))
+(load-theme 'modus-vivendi)

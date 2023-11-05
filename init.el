@@ -37,4 +37,4 @@
 (load-directory (config-path-concat "theme")) ;; Load the theme after to avoid bugginess
 
 ;; Bring back the GC Threshold for runtime performance
-(setq gc-cons-threshold (* 2 1000 1000))
+(setq gc-cons-threshold 100000000)
