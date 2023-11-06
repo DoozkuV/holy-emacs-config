@@ -79,3 +79,7 @@
   :init (setq markdown-command "multimarkdown")
   :bind (:map markdown-mode-map
          ("C-c C-e" . markdown-do)))
+
+(use-package paredit
+  :hook
+  ((emacs-lisp-mode lisp-mode lisp-interaction-mode) . paredit-mode))
