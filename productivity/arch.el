@@ -26,6 +26,16 @@
   (interactive "MProgram Name: ")
   (gp/arch-command "-Rns" program))
 
+(defun gp/arch-search (query)
+  "Runs pacman -Ss utilizing the inputted query"
+  (interactive "MQuery: ")
+  (gp/arch-command "-Ss" query))
+
+(defun gp/arch-query (query)
+  "Runs pacman -Qs utilizing the inputted query"
+  (interactive "MQuery: ")
+  (gp/arch-command "-Qs" query))
+
 (defun gp/arch-command (args programs)
   "Runs either arch or pacman with `gp/sudo-program', with the specified args and programs
 If programs is nil, it will act as if nothing is there."
@@ -37,3 +47,5 @@ If programs is nil, it will act as if nothing is there."
 (keymap-global-set "C-c a u" 'gp/arch-update)
 (keymap-global-set "C-c a i" 'gp/arch-install)
 (keymap-global-set "C-c a d" 'gp/arch-uninstall)
+(keymap-global-set "C-c a s" 'gp/arch-search)
+(keymap-global-set "C-c a q" 'gp/arch-query)
