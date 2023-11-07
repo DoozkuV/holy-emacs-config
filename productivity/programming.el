@@ -19,24 +19,30 @@
 ;; Editting Yaml files
 (use-package yaml-mode)
 
+;; Haskel
+(use-package haskell-mode)
+;; Rust
+;; There also exists a "Rustic" mode which adds more features
+;; but for now we are going without 
+(use-package rust-mode
+  :config
+  (setq rust-format-on-save t))
+
+;; Editing markdown files
+;; See https://github.com/jrblevin/markdown-mode for more info
+(use-package markdown-mode
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown")
+  :bind (:map markdown-mode-map
+         ("C-c C-e" . markdown-do)))
+
+(use-package paredit
+  :hook
+  ((emacs-lisp-mode lisp-mode lisp-interaction-mode) . paredit-mode))
+
+
 ;;; LSP CONFIGURATION
-;; (use-package lsp-mode
-;;   :commands (lsp lsp-deferred)
-;;   :init
-;;   (setq read-process-output-max (* 1024 1024))
-;;   (setq lsp-use-plists t)
-;;   (setq lsp-keymap-prefix "C-c l")
-;;   :hook ((c++-mode c-mode java-mode python-mode) . lsp-deferred)
-;;   :config
-;;   ;; Determines how often lsp-mode refreshes highlights, lenses, links, etc.
-;;   (setq lsp-idle-delay 0.25)
-;;   (lsp-enable-which-key-integration t))
-
-;; (use-package lsp-ui
-;;   :commands lsp-ui-mode
-;;   :hook (lsp-mode . lsp-ui-mode))
-
-
 ;; We utilize the built in 'eglot' package that offers a more minimalist lsp
 ;; interface while taking advantage of much of emacs's existing functionality
 (use-package eglot
@@ -64,22 +70,19 @@
 
 (use-package yasnippet-snippets)
 
-;; Rust
-;; There also exists a "Rustic" mode which adds more features
-;; but for now we are going without 
-(use-package rust-mode
-  :config
-  (setq rust-format-on-save t))
+;;; OLD LSP CONFIGURATION
+;; (use-package lsp-mode
+;;   :commands (lsp lsp-deferred)
+;;   :init
+;;   (setq read-process-output-max (* 1024 1024))
+;;   (setq lsp-use-plists t)
+;;   (setq lsp-keymap-prefix "C-c l")
+;;   :hook ((c++-mode c-mode java-mode python-mode) . lsp-deferred)
+;;   :config
+;;   ;; Determines how often lsp-mode refreshes highlights, lenses, links, etc.
+;;   (setq lsp-idle-delay 0.25)
+;;   (lsp-enable-which-key-integration t))
 
-;; Editing markdown files
-;; See https://github.com/jrblevin/markdown-mode for more info
-(use-package markdown-mode
-  :ensure t
-  :mode ("README\\.md\\'" . gfm-mode)
-  :init (setq markdown-command "multimarkdown")
-  :bind (:map markdown-mode-map
-         ("C-c C-e" . markdown-do)))
-
-(use-package paredit
-  :hook
-  ((emacs-lisp-mode lisp-mode lisp-interaction-mode) . paredit-mode))
+;; (use-package lsp-ui
+;;   :commands lsp-ui-mode
+;;   :hook (lsp-mode . lsp-ui-mode))
