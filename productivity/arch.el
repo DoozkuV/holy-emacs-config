@@ -4,23 +4,35 @@
 ;; which can be downloaded from the AUR
 ;; THEY WILL NOT WORK WITHOUT YAY INSTALLED
 
-;;;###autoload
-(defun gp/arch-update ()
-  "Runs the Yay shell command to automatically update the system on Arch Linux"
-  (interactive)
-  (async-shell-command "yay -Syyu"))
+(defvar gp/sudo-program "sudo"
+  "A string referring to the command to be used by arch package install commands")
+(setq gp/sudo-program "doas")
 
-;;;###autoload
+(defvar gp/arch-use-yay t
+  "Use yay for arch commands if installed")
+
+(defun gp/arch-update ()
+  "Runs the pacman/yay shell command to automatically update the system on Arch Linux"
+  (interactive)
+  (gp/arch-command "-Syyu" nil))
+
 (defun gp/arch-install (program)
   "Runs the Yay shell command to install the inputted program"
   (interactive "MProgram Name: ")
-  (async-shell-command (concat "yay -S " program)))
+  (gp/arch-command "-S" program))
 
-;;;###autoload
 (defun gp/arch-uninstall (program)
-  "Runs the Yay shell command to uninstall the inputted program"
+  "Runs the shell command to delete the inputted program"
   (interactive "MProgram Name: ")
-  (async-shell-command (concat "yay -Rns " program)))
+  (gp/arch-command "-Rns" program))
+
+(defun gp/arch-command (args programs)
+  "Runs either arch or pacman with `gp/sudo-program', with the specified args and programs
+If programs is nil, it will act as if nothing is there."
+  (let ((pacman-executable (if (and (executable-find "yay") gp/arch-use-yay)
+			       (format "yay --sudo %s" gp/sudo-program)
+			     (format "%s pacman" gp/sudo-program))))
+    (async-shell-command (concat pacman-executable " " args " " programs))))
 
 (keymap-global-set "C-c a u" 'gp/arch-update)
 (keymap-global-set "C-c a i" 'gp/arch-install)
