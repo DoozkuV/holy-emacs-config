@@ -36,5 +36,9 @@
 (load-directory (config-path-concat "productivity"))
 (load-directory (config-path-concat "theme")) ;; Load the theme after to avoid bugginess
 
+;; Disabled commands 
+(put 'set-goal-column 'disabled nil)
+
 ;; Bring back the GC Threshold for runtime performance
 (setq gc-cons-threshold 100000000)
+

@@ -6,6 +6,9 @@
 ;; Allows one to repeat certain commands 
 (repeat-mode 1)
 
+;;; Kill read read only
+(setq kill-read-only-ok t)
+
 ;;; STARTUP BUFFER
 (setq inhibit-splash-screen t
       initial-buffer-choice nil)
