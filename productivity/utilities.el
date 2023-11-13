@@ -1,3 +1,24 @@
+;;; LINE NUMBERS
+(global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative)
+;; Disable line numbers in the following modes 
+(dolist (mode '(;; org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+                vterm-mode-hook
+                eshell-mode-hook
+                inferior-python-mode-hook
+                helpful-mode-hook
+                mu4e-view-mode-hook
+                treemacs-mode-hook
+                inferior-emacs-lisp-mode-hook
+                doc-view-mode-hook
+                image-minor-mode-hook
+                pdf-tools-enabled-hook
+		eww-mode-hook
+                mu4e-main-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
 ;;; RECENTF
 (recentf-mode 1) ; Enable file history
 (keymap-global-set "C-c C-r" 'recentf)

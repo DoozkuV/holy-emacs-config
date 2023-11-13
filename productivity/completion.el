@@ -7,7 +7,12 @@
 (use-package vertico
   :diminish
   :bind (:map vertico-map
-	      ("C-DEL" . vertico-directory-delete-word))
+	      ("C-DEL" . vertico-directory-delete-word)
+	      ("C-j" . vertico-next)  
+	      ("C-k" . vertico-previous)
+	      ("C-f" . vertico-exit)
+	      :map minibuffer-local-map
+	      ("M-h" . backward-kill-word))
   :custom
   (vertico-cycle t)
   :init
@@ -66,7 +71,7 @@
 (use-package embark
   :bind
   ("C-." . embark-act)
-  ("C-;" . embark-dwim)
+  ;; ("C-;" . embark-dwim)
   ("C-h B" . embark-bindings)
   :config
   ;; Hide the mode line of the Embark live/completions buffers

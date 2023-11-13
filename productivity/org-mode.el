@@ -12,6 +12,8 @@ emphasis markers inside of org mode"
   :bind
   ("C-c o c" . org-capture)
   ("C-c o a" . org-agenda)
+  :hook
+  (org-mode . flyspell-mode)
   :config
   ;; Make it so org mode always starts folded
   (setq org-startup-folded t)
@@ -54,10 +56,43 @@ emphasis markers inside of org mode"
 (use-package org-roam
   ;; :after org
   :commands (org-roam-node-insert org-roam-node-find org-roam-capture)
-  :bind
-  ("C-c r c" . org-roam-capture)
-  ("C-c r f" . org-roam-node-find)
-  ("C-c r i" . org-roam-node-insert)
+  :general
+  (gp/leader-keys
+    "r" '(:ignore t :which-key "roam")
+    "ri" '(org-roam-node-insert :which-key "Node Insert")
+    "rc" '(org-roam-capture :which-key "Node Capture"))
   :config
   (setq org-roam-directory (file-truename (concat gp/org-directory "/roam")))
   (org-roam-db-autosync-mode))
+
+
+;; Org-roam integration
+(use-package consult-org-roam
+  :ensure t
+  :after org-roam
+  :init
+  (require 'consult-org-roam)
+  ;; Activate the minor mode
+  (consult-org-roam-mode 1)
+  :custom
+  ;; Use `ripgrep' for searching with `consult-org-roam-search'
+  (consult-org-roam-grep-func #'consult-ripgrep)
+  ;; Configure a custom narrow key for `consult-buffer'
+  (consult-org-roam-buffer-narrow-key ?r)
+  ;; Display org-roam buffers right after non-org-roam buffers
+  ;; in consult-buffer (and not down at the bottom)
+  (consult-org-roam-buffer-after-buffers t)
+  :general
+  (gp/leader-keys
+    "rf" '(consult-org-roam-file-find :which-key "Node Find")
+
+    "rl" '(consult-org-roam-backlinks :which-key "Find Roam Backlinks")
+    "rL" '(consult-org-roam-forward-links :which-key "Find Roam Forward Links")
+
+    "rs" '(consult-org-roam-search :which-key "Search in Roam")
+    "rb" '(consult-org-roam-buffer :which-key "Search Roam Buffers")) 
+  :config
+  ;; Eventually suppress previewing for certain functions
+  (consult-customize
+   consult-org-roam-forward-links
+   :preview-key "M-."))
