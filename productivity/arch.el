@@ -50,8 +50,7 @@ If programs is nil, it will act as if nothing is there."
   "ai" '(gp/arch-install :which-key "Arch Install")
   "ad" '(gp/arch-uninstall :which-key "Arch Delete")
   "as" '(gp/arch-search :which-key "Arch Search")
-  "aq" '(gp/arch-query :which-key "Arch Query")
-  )
+  "aq" '(gp/arch-query :which-key "Arch Query"))
 
 ;; (keymap-global-set "C-c a u" 'gp/arch-update)
 ;; (keymap-global-set "C-c a i" 'gp/arch-install)
