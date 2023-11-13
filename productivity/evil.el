@@ -82,10 +82,10 @@
       "oe" '(eshell :which-key "Open Eshell")
       "op" '(treemacs :which-key "Open File-Tree")
       "om" '(mu4e :which-key "Open Mail")
-      "j" '((lambda () (interactive) (org-capture nil "jj")) :which-key "Capture Journal")
-      "c" '((lambda () (interactive)
-              (find-file (concat config-path "/config.org")))
-            :which-key "Open Config")
+      ;; "j" '((lambda () (interactive) (org-capture nil "jj")) :which-key "Capture Journal")
+      ;; "c" '((lambda () (interactive)
+      ;;         (find-file (concat config-path "/config.org")))
+      ;;       :which-key "Open Config")
 
       ;; Help
       "h" '(help-command :which-key "help")

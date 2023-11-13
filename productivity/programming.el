@@ -37,10 +37,9 @@
   :bind (:map markdown-mode-map
          ("C-c C-e" . markdown-do)))
 
-(use-package paredit
-  :hook
-  ((emacs-lisp-mode lisp-mode lisp-interaction-mode) . paredit-mode))
-
+;; (use-package paredit
+;;   :hook
+;;   ((emacs-lisp-mode lisp-mode lisp-interaction-mode) . paredit-mode))
 
 ;;; LSP CONFIGURATION
 ;; We utilize the built in 'eglot' package that offers a more minimalist lsp
@@ -55,6 +54,18 @@
 	      ("C-c l c e" . eglot-code-action-extract)
 	      ("C-c l c i" . eglot-code-action-inline)
 	      ("C-c l c r" . eglot-code-action-rewrite))
+  :general
+  (gp/local-leader-keys
+    :keymaps 'eglot-mode-map
+    "f" '(eglot-format :which-key "Format")
+    "r" '(eglot-rename :which-key "Eglot Rename")
+    "c" '(:ignore t :which-key "code actions")
+    "ca" '(eglot-code-actions :which-key "Code Actions")
+    "co" '(eglot-code-action-organize-imports :which-key "Organize Imports")
+    "cq" '(eglot-code-action-quickfix :which-key "Quickfix")
+    "ce" '(eglot-code-action-extract :which-key "Extract")
+    "ci" '(eglot-code-action-inline :which-key "Inline")
+    "cr" '(eglot-code-action-rewrite :which-key "Rewrite"))
   :init
   (dolist (mode '(c++-mode-hook
 		  c-mode-hook

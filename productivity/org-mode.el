@@ -23,8 +23,7 @@ emphasis markers inside of org mode"
     "q" '(org-set-tags-command :which-key "Set Tags")
     "e" '(org-export-dispatch :which-key "Export")
     "h" '(gp/org-toggle-emphasis-markers :which-key "Toggle Emphasis Markers")
-    "x" '(org-toggle-checkbox :which-key "Toggle Emphasis Markers")
-    )
+    "x" '(org-toggle-checkbox :which-key "Toggle Emphasis Markers"))
 
   :hook
   (org-mode . flyspell-mode)
