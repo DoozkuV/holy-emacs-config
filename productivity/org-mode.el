@@ -12,6 +12,20 @@ emphasis markers inside of org mode"
   :bind
   ("C-c o c" . org-capture)
   ("C-c o a" . org-agenda)
+  :general
+  ;; Local leader bindings
+  (gp/local-leader-keys
+    :keymaps 'org-mode-map
+    "d" '(org-deadline :which-key "Insert Deadline")
+    "b" '(org-babel-tangle :which-key "Babel Tangle")
+    "i" '(org-insert-link :which-key "Insert Link")
+    "y" '(org-store-link :which-key "Store Link")
+    "q" '(org-set-tags-command :which-key "Set Tags")
+    "e" '(org-export-dispatch :which-key "Export")
+    "h" '(gp/org-toggle-emphasis-markers :which-key "Toggle Emphasis Markers")
+    "x" '(org-toggle-checkbox :which-key "Toggle Emphasis Markers")
+    )
+
   :hook
   (org-mode . flyspell-mode)
   :config

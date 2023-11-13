@@ -44,8 +44,17 @@ If programs is nil, it will act as if nothing is there."
 			     (format "%s pacman" gp/sudo-program))))
     (async-shell-command (concat pacman-executable " " args " " programs))))
 
-(keymap-global-set "C-c a u" 'gp/arch-update)
-(keymap-global-set "C-c a i" 'gp/arch-install)
-(keymap-global-set "C-c a d" 'gp/arch-uninstall)
-(keymap-global-set "C-c a s" 'gp/arch-search)
-(keymap-global-set "C-c a q" 'gp/arch-query)
+(gp/leader-keys
+  "a" '(:ignore t :which-key "arch")
+  "au" '(gp/arch-update :which-key "Arch Update")
+  "ai" '(gp/arch-install :which-key "Arch Install")
+  "ad" '(gp/arch-uninstall :which-key "Arch Delete")
+  "as" '(gp/arch-search :which-key "Arch Search")
+  "aq" '(gp/arch-query :which-key "Arch Query")
+  )
+
+;; (keymap-global-set "C-c a u" 'gp/arch-update)
+;; (keymap-global-set "C-c a i" 'gp/arch-install)
+;; (keymap-global-set "C-c a d" 'gp/arch-uninstall)
+;; (keymap-global-set "C-c a s" 'gp/arch-search)
+;; (keymap-global-set "C-c a q" 'gp/arch-query)

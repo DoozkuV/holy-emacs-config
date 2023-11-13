@@ -1,0 +1,12 @@
+backup-files/
+eln-cache/
+elpa/
+eshell/
+history
+org-roam.db
+projects/
+recentf/
+transient/
+treesitter/
+url/
+bookmarks
