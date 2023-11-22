@@ -7,6 +7,7 @@
   :bind (("<escape>" . keyboard-escape-quit))
   :init
   (setq evil-want-integration t)
+  ;; (setq evil-want-minibuffer t)
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
   (setq evil-want-C-i-jump nil)
@@ -35,6 +36,7 @@
     (gp/leader-keys
       ;; Toggles
       "t" '(:ignore t :which-key "toggles")
+      "ta" '(auto-fill-mode :which-key "Toggle auto fill")
       "tt" '(consult-theme :which-key "Choose Theme")
       "tc" '(corfu-mode :which-key "Toggle corfu")
       "tp" '(electric-pair-mode :which-key "Toggle electric pairs")
@@ -77,11 +79,14 @@
       "oC" '(calc :which-key "Open Calculator")
       "oa" '(org-agenda :which-key "Open Org Agenda")
       "ot" '(vterm :which-key "Open Terminal")
+      "oT" '(vterm-other-window :which-key "Open Terminal")
       "oi" '(ielm :which-key "Open Ielm")
       "or" '(gts-do-translate :which-key "Open Translator")
       "oe" '(eshell :which-key "Open Eshell")
+      "oE" '(eshell-other-window :which-key "Open Eshell")
       "op" '(treemacs :which-key "Open File-Tree")
       "om" '(mu4e :which-key "Open Mail")
+      "ob" '(eww :which-key "Open Mail")
       ;; "j" '((lambda () (interactive) (org-capture nil "jj")) :which-key "Capture Journal")
       ;; "c" '((lambda () (interactive)
       ;;         (find-file (concat config-path "/config.org")))
@@ -95,8 +100,8 @@
       "sr" '(consult-recent-file :which-key "Search Recent Files")
       "sb" '(consult-buffer :which-key "Search Buffers")
       "sg" '(consult-ripgrep :which-key "Search Grep")
-      "sm" '(consult-man :which-key "Search Grep")
-      "si" '(consult-info :which-key "Search Grep")
+      "sm" '(consult-man :which-key "Search Man")
+      "si" '(consult-info :which-key "Search Info")
       "/" '(consult-line :which-key "Search By Buffer")
 
       ;; Quit
@@ -108,9 +113,15 @@
   :after evil
   :custom
   (evil-collection-want-unimpaired-p t)
-  (evil-collection-setup-minibuffer t)
+  ;; (evil-collection-setup-minibuffer t)
   :config
   (evil-collection-init))
+
+(use-package evil-org
+  :after org
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
 
 ;; Set up comment commands
 (use-package evil-nerd-commenter
@@ -131,3 +142,14 @@
   (setq evil-snipe-scope 'line)
   (setq evil-snipe-repeat-scope 'visible)
   (setq evil-snipe-spillover-scope 'whole-visible))
+
+;; Binds
+;; y s <selection>: Insert delimiters
+;; S: Same as above but for visual mode
+;; c s: Change delimiters
+;; d s: Delete delimiters
+(use-package evil-surround
+  :after evil
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))

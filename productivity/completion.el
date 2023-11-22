@@ -12,7 +12,8 @@
 	      ("C-k" . vertico-previous)
 	      ("C-f" . vertico-exit)
 	      :map minibuffer-local-map
-	      ("M-h" . backward-kill-word))
+	      ("M-h" . backward-kill-word)
+	      ("C-w" . backward-kill-word))
   :custom
   (vertico-cycle t)
   :init
@@ -49,7 +50,7 @@
   (corfu-cycle t) ; Allows cycling through candidates
   (corfu-auto t) ; Enables auto-completion
   (corfu-auto-prefix 2) 
-  (corfu-auto-delay 0.15) ; Delay between typing and the completion window appearing
+  (corfu-auto-delay 0.0) ; Delay between typing and the completion window appearing
   (corfu-quit-at-boundry 'separator)
   (corfu-echo-documentation 0.25)
   (corfu-preview-current 'insert) ; Do not preview current candidate

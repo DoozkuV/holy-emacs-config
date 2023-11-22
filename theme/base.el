@@ -18,3 +18,9 @@
       tab-bar-new-button-show nil ; Disable new and cose button on tab bar
       tab-bar-close-button-show nil
       tab-bar-auto-width t) ; Static tab bar with if true
+
+;;; FONT CONFIGURATION
+(set-face-attribute 'default nil :font "monospace" :height 120) 
+
+;; Set the fixed pitch face
+(set-face-attribute 'fixed-pitch nil :font "monospace")

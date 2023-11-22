@@ -1,22 +1,14 @@
 ;;; ORG MODE
-(defun gp/org-toggle-emphasis-markers ()
-  "Toggles the 'org-hide-emphasis-markers' variable, effectively toggling whether or not to hide
-emphasis markers inside of org mode"
-  (interactive)
-  (message "org-hide-emphasis-markers=%s"
-	   (setq org-hide-emphasis-markers (not org-hide-emphasis-markers))))
-
 (defvar gp/org-directory "~/Documents/org"
-  "The directory where this configuration's org files will be stored")
+  "Directory of org files within this configuration")
+
 (use-package org
-  :bind
-  ("C-c o c" . org-capture)
-  ("C-c o a" . org-agenda)
+  :ensure nil
+  :hook
+  (org-mode . flyspell-mode)
   :general
-  ;; Local leader bindings
   (gp/local-leader-keys
     :keymaps 'org-mode-map
-    "d" '(org-deadline :which-key "Insert Deadline")
     "b" '(org-babel-tangle :which-key "Babel Tangle")
     "i" '(org-insert-link :which-key "Insert Link")
     "y" '(org-store-link :which-key "Store Link")
@@ -24,9 +16,6 @@ emphasis markers inside of org mode"
     "e" '(org-export-dispatch :which-key "Export")
     "h" '(gp/org-toggle-emphasis-markers :which-key "Toggle Emphasis Markers")
     "x" '(org-toggle-checkbox :which-key "Toggle Emphasis Markers"))
-
-  :hook
-  (org-mode . flyspell-mode)
   :config
   ;; Make it so org mode always starts folded
   (setq org-startup-folded t)
@@ -73,7 +62,22 @@ emphasis markers inside of org mode"
   (gp/leader-keys
     "r" '(:ignore t :which-key "roam")
     "ri" '(org-roam-node-insert :which-key "Node Insert")
+    "rf" '(consult-org-roam-file-find :which-key "Node Find")
+
+    "rl" '(consult-org-roam-backlinks :which-key "Find Roam Backlinks")
+    "rL" '(consult-org-roam-forward-links :which-key "Find Roam Forward Links")
+
+    "rs" '(consult-org-roam-search :which-key "Search in Roam")
+    "rb" '(consult-org-roam-buffer :which-key "Search Roam Buffers") 
     "rc" '(org-roam-capture :which-key "Node Capture"))
+
+  ;; Define a key for inserting text
+  ;; Currently isn't working 
+  ;; (general-define-key
+  ;;  :states ''insert
+  ;;  :keymaps 'org-roam-mode-map
+  ;;  :major-modes 'org-mode
+  ;;  "C-c i" 'org-roam-node-insert)
   :config
   (setq org-roam-directory (file-truename (concat gp/org-directory "/roam")))
   (org-roam-db-autosync-mode))
@@ -95,15 +99,15 @@ emphasis markers inside of org mode"
   ;; Display org-roam buffers right after non-org-roam buffers
   ;; in consult-buffer (and not down at the bottom)
   (consult-org-roam-buffer-after-buffers t)
-  :general
-  (gp/leader-keys
-    "rf" '(consult-org-roam-file-find :which-key "Node Find")
+  ;; :general
+  ;; (gp/leader-keys
+  ;;   "rf" '(consult-org-roam-file-find :which-key "Node Find")
 
-    "rl" '(consult-org-roam-backlinks :which-key "Find Roam Backlinks")
-    "rL" '(consult-org-roam-forward-links :which-key "Find Roam Forward Links")
+  ;;   "rl" '(consult-org-roam-backlinks :which-key "Find Roam Backlinks")
+  ;;   "rL" '(consult-org-roam-forward-links :which-key "Find Roam Forward Links")
 
-    "rs" '(consult-org-roam-search :which-key "Search in Roam")
-    "rb" '(consult-org-roam-buffer :which-key "Search Roam Buffers")) 
+  ;;   "rs" '(consult-org-roam-search :which-key "Search in Roam")
+  ;;   "rb" '(consult-org-roam-buffer :which-key "Search Roam Buffers")) 
   :config
   ;; Eventually suppress previewing for certain functions
   (consult-customize

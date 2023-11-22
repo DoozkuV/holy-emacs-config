@@ -80,6 +80,9 @@
 ;;; DICTIONARY
 (setq dictionary-server "localhost")
 
+;;; TELEGA - Telegram/Whatsapp Integration
+;; (use-package telega)
+
 ;;; PASSWORD STORE
 ;; Integration with the pass program
 (use-package password-store

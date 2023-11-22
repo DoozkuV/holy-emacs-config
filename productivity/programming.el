@@ -36,10 +36,19 @@
   :init (setq markdown-command "multimarkdown")
   :bind (:map markdown-mode-map
          ("C-c C-e" . markdown-do)))
+(use-package lua-mode)
 
 ;; (use-package paredit
 ;;   :hook
 ;;   ((emacs-lisp-mode lisp-mode lisp-interaction-mode) . paredit-mode))
+
+
+(use-package yasnippet
+  :diminish t
+  :init
+  (yas-global-mode 1))
+
+(use-package yasnippet-snippets)
 
 ;;; LSP CONFIGURATION
 ;; We utilize the built in 'eglot' package that offers a more minimalist lsp
@@ -74,25 +83,23 @@
 		  python-mode-hook))
     (add-hook mode 'eglot-ensure)))
 
-(use-package yasnippet
-  :diminish t
-  :init
-  (yas-global-mode 1))
-
-(use-package yasnippet-snippets)
-
-;;; OLD LSP CONFIGURATION
+;; OLD LSP CONFIGURATION
 ;; (use-package lsp-mode
 ;;   :commands (lsp lsp-deferred)
 ;;   :init
 ;;   (setq read-process-output-max (* 1024 1024))
 ;;   (setq lsp-use-plists t)
 ;;   (setq lsp-keymap-prefix "C-c l")
-;;   :hook ((c++-mode c-mode java-mode python-mode) . lsp-deferred)
+;;   :hook ((c++-mode c-mode java-mode python-mode rust-mode) . lsp-deferred)
+;;   :general
+;;   (general-def 'normal lsp-mode :definer 'minor-mode
+;;     "SPC c" lsp-command-map)
 ;;   :config
 ;;   ;; Determines how often lsp-mode refreshes highlights, lenses, links, etc.
 ;;   (setq lsp-idle-delay 0.25)
-;;   (lsp-enable-which-key-integration t))
+;;   (lsp-enable-which-key-integration t)
+;;   (add-hook 'lsp-mode-hook (lambda ()
+;; 			     (setq-local evil-lookup-func 'lsp-describe-thing-at-point))))
 
 ;; (use-package lsp-ui
 ;;   :commands lsp-ui-mode

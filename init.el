@@ -1,4 +1,4 @@
-;; Setup to make emacs startup significantly faster
+; Setup to make emacs startup significantly faster
 ;; This is later dialed back at the end of the config
 (setq gc-cons-threshold (* 50 1000 1000))
 
@@ -20,7 +20,6 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (eval-when-compile (require 'use-package))
-
 
 ;;; LOAD CONFIGURATION FILES
 ;; Here I define some utilities which will come in use now and later

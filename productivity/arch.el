@@ -36,6 +36,17 @@
   (interactive "MQuery: ")
   (gp/arch-command "-Qs" query))
 
+(defun gp/arch-find-package-with-file (file)
+  "Runs pacman -F to search for package containing `file'"
+  (interactive "MQuery: ")
+  (gp/arch-command "-F" file))
+
+(defun gp/arch-update-file-database (file)
+  "Runs pacman -Fy to update the file database"
+  (interactive)
+  (gp/arch-command "-Fy" nil))
+
+
 (defun gp/arch-command (args programs)
   "Runs either arch or pacman with `gp/sudo-program', with the specified args and programs
 If programs is nil, it will act as if nothing is there."
@@ -50,6 +61,8 @@ If programs is nil, it will act as if nothing is there."
   "ai" '(gp/arch-install :which-key "Arch Install")
   "ad" '(gp/arch-uninstall :which-key "Arch Delete")
   "as" '(gp/arch-search :which-key "Arch Search")
+  "ay" '(gp/arch-update-file-database :which-key "Arch Update File Database")
+  "af" '(gp/arch-find-package-with-file :which-key "Arch Find Package With File")
   "aq" '(gp/arch-query :which-key "Arch Query"))
 
 ;; (keymap-global-set "C-c a u" 'gp/arch-update)
