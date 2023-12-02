@@ -52,6 +52,7 @@
 
       ;; Buffer management
       "," '(consult-buffer :which-key "Switch Buffer")
+      "<" '(consult-buffer-other-window :which-key "Switch Buffer Other Window")
       "b" '(:ignore t :which-key "buffer")
       ;;; Consult buffer
       "bb" '(consult-buffer :which-key "Kill Current Buffer")
@@ -93,6 +94,10 @@
       ;;         (find-file (concat config-path "/config.org")))
       ;;       :which-key "Open Config")
 
+      "cw" '(count-words :which-key "Count Words")
+      "ct" '(gts-do-translate :which-key "Consult Translator")
+      "cd" '(dictionary-search :which-key "Consult Dictionary")
+      "cc" '(calc :which-key "Consult Calculator")
       ;; Help
       "h" '(help-command :which-key "help")
 
