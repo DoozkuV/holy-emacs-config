@@ -28,6 +28,8 @@ Intended for `after-make-frame-functions'."
   (set-face-attribute 'fixed-pitch nil :font "monospace")
   ;; Remove the hook of this function after it is called once
   ;; This function will work for all future frames created
-  (remove-hook 'after-make-frame-functions #'gp/configure-default-fonts))
+  ;; (remove-hook 'after-make-frame-functions #'gp/configure-default-fonts)
+  )
 
+;; Makes sure that the frames spawn the fonts
 (add-hook 'after-make-frame-functions #'gp/configure-default-fonts)
