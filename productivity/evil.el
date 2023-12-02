@@ -46,6 +46,7 @@
       "." '(find-file :which-key "Find Files")
       ;; Window Management
       "w" '(evil-window-map :which-key "window")
+      ";" '(other-window-prefix :which-key "Display Buffer New Window")
       "`" '(evil-switch-to-windows-last-buffer
             :which-key "Switch To Last Buffer")
 
@@ -86,7 +87,7 @@
       "oE" '(eshell-other-window :which-key "Open Eshell")
       "op" '(treemacs :which-key "Open File-Tree")
       "om" '(mu4e :which-key "Open Mail")
-      "ob" '(eww :which-key "Open Mail")
+      "ob" '(eww :which-key "Open Browser")
       ;; "j" '((lambda () (interactive) (org-capture nil "jj")) :which-key "Capture Journal")
       ;; "c" '((lambda () (interactive)
       ;;         (find-file (concat config-path "/config.org")))
