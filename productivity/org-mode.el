@@ -12,6 +12,7 @@
     "b" '(org-babel-tangle :which-key "Babel Tangle")
     "i" '(org-insert-link :which-key "Insert Link")
     "y" '(org-store-link :which-key "Store Link")
+    "d" '(org-deadline :which-key "Set Tags")
     "q" '(org-set-tags-command :which-key "Set Tags")
     "e" '(org-export-dispatch :which-key "Export")
     "h" '(gp/org-toggle-emphasis-markers :which-key "Toggle Emphasis Markers")
@@ -52,7 +53,9 @@
 	   (file+olp+datetree ,(concat gp/org-directory "/journal.org"))
 	   "* %<%I:%M %p> - Journal :journal:\n\n%?\n"
 	   :clock-in :clock-resume
-	   :empty-lines 1))))
+	   :empty-lines 1)))
+  ;; Load exporting org-mode into markdown
+  (require 'ox-md nil t))
 
 ;; Org roam configuration
 (use-package org-roam

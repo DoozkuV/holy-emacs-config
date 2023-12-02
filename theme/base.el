@@ -20,7 +20,14 @@
       tab-bar-auto-width t) ; Static tab bar with if true
 
 ;;; FONT CONFIGURATION
-(set-face-attribute 'default nil :font "monospace" :height 120) 
+(defun gp/configure-default-fonts (frame)
+  "Configure font given initial non-daemon FRAME.
+Intended for `after-make-frame-functions'."
+  ;; Set the fixed pitch face
+  (set-face-attribute 'default nil :font "monospace" :height 120) 
+  (set-face-attribute 'fixed-pitch nil :font "monospace")
+  ;; Remove the hook of this function after it is called once
+  ;; This function will work for all future frames created
+  (remove-hook 'after-make-frame-functions #'gp/configure-default-fonts))
 
-;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "monospace")
+(add-hook 'after-make-frame-functions #'gp/configure-default-fonts)

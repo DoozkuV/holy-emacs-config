@@ -11,7 +11,7 @@
   :init
   ;; Enable flashing of visual bell 
   (doom-themes-visual-bell-config)
-  (load-theme 'doom-opera t))
+  (load-theme 'doom-rouge t))
 ;; (load-theme 'modus-vivendi)
 ;; (use-package ewal
 ;;   :ensure t
