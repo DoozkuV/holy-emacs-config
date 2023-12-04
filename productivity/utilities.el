@@ -80,6 +80,37 @@
 ;;; DICTIONARY
 (setq dictionary-server "localhost")
 
+;;; Elfeed
+(use-package elfeed
+  :general
+  (gp/leader-keys
+    "ow" '(elfeed :which-key "Open Elfeed"))
+  :config
+  (setq elfeed-feeds
+	'("https://www.nhc.noaa.gov/xml/OFFNT3.xml"
+	  "https://www.reutersagency.com/feed/?taxonomy=best-regions&post_type=best"
+	  "https://www.reutersagency.com/feed/?best-topics=political-general&post_type=best")))
+
+;; Elfeed youtube integration
+(use-package elfeed-tube
+  :after elfeed
+  ;; :demand t
+  :config
+  ;; (setq elfeed-tube-auto-save-p nil) ; default value
+  ;; (setq elfeed-tube-auto-fetch-p t)  ; default value
+  (elfeed-tube-setup)
+  :bind (:map elfeed-show-mode-map
+         ("F" . elfeed-tube-fetch)
+         ([remap save-buffer] . elfeed-tube-save)
+         :map elfeed-search-mode-map
+         ("F" . elfeed-tube-fetch)
+         ([remap save-buffer] . elfeed-tube-save)))
+(use-package elfeed-tube-mpv
+  :bind (:map elfeed-show-mode-map
+              ("C-c C-f" . elfeed-tube-mpv-follow-mode)
+              ("C-c C-w" . elfeed-tube-mpv-where)))
+
+
 ;;; TELEGA - Telegram/Whatsapp Integration
 ;; (use-package telega)
 
@@ -88,6 +119,10 @@
 (use-package password-store
   :defer)
 
+;;; Speed type - funny typing thing
+(use-package speed-type
+  :commands (speed-type-text)
+  :config (evil-set-initial-state 'speed-type-mode 'insert))
 ;;; KILL ALL BUFFERS COMMAND
 (defun gp/kill-all-buffers ()
   "Kills every buffer in the buffer list and then opens the scratch buffer."

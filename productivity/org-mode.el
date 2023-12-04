@@ -17,6 +17,12 @@
     "e" '(org-export-dispatch :which-key "Export")
     "h" '(gp/org-toggle-emphasis-markers :which-key "Toggle Emphasis Markers")
     "x" '(org-toggle-checkbox :which-key "Toggle Emphasis Markers"))
+  ;; Open links with the enter key
+  (general-define-key
+   :states 'normal
+   :keymaps 'org-mode-map
+   "RET" 'org-open-at-point)
+  
   :config
   ;; Make it so org mode always starts folded
   (setq org-startup-folded t)

@@ -44,6 +44,7 @@
       "tf" '(flyspell-mode :which-key "Toggle flyspell mode")
       "tF" '(flyspell-prog-mode :which-key "Toggle flyspell prog mode")
       "." '(find-file :which-key "Find Files")
+      ">" '(find-file-other-window :which-key "Find Files Other Window")
       ;; Window Management
       "w" '(evil-window-map :which-key "window")
       ";" '(other-window-prefix :which-key "Display Buffer New Window")
