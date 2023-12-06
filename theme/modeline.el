@@ -12,7 +12,7 @@
   ;; This should be set explicitly in daemon mode
   (doom-modeline-icon t)
   ;; Minor modes
-  (doom-modeline-minor-modes t)
+  ;; (doom-modeline-minor-modes t)
   ;; Word count
   (doom-modeline-enable-word-count nil)
   :hook (after-init . doom-modeline-mode)

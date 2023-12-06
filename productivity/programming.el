@@ -36,7 +36,13 @@
   :init (setq markdown-command "multimarkdown")
   :bind (:map markdown-mode-map
          ("C-c C-e" . markdown-do)))
+
 (use-package lua-mode)
+
+(use-package web-mode
+  :mode ("\\.html\\'"
+	 "\\.css\\'"
+	 "\\.php\\'"))
 
 ;; (use-package paredit
 ;;   :hook

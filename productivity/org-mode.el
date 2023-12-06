@@ -6,6 +6,8 @@
   :ensure nil
   :hook
   (org-mode . flyspell-mode)
+  :commands
+  (org-timer-set-timer)
   :general
   (gp/local-leader-keys
     :keymaps 'org-mode-map

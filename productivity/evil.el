@@ -150,6 +150,11 @@
   (setq evil-snipe-repeat-scope 'visible)
   (setq evil-snipe-spillover-scope 'whole-visible))
 
+;; multiple cursor support
+(use-package evil-multiedit
+  :after evil
+  :config
+  (evil-multiedit-default-keybinds))
 ;; Binds
 ;; y s <selection>: Insert delimiters
 ;; S: Same as above but for visual mode

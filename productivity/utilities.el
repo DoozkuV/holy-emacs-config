@@ -34,6 +34,12 @@
 (setq inhibit-splash-screen t
       initial-buffer-choice nil)
 
+;;; SCRATCH BUFFER
+(defun gp/scratch-buffer-defaults ()
+  "Setup hooks to set defaults in the scratch buffer"
+  (corfu-mode 0)
+  (auto-fill-mode 1))
+(advice-add 'scratch-buffer :after 'gp/scratch-buffer-defaults)
 ;;; ELECTRIC PAIR MODE
 ;; Enable it for programming buffers 
 (dolist (mode '(prog-mode-hook
@@ -123,6 +129,7 @@
 (use-package speed-type
   :commands (speed-type-text)
   :config (evil-set-initial-state 'speed-type-mode 'insert))
+
 ;;; KILL ALL BUFFERS COMMAND
 (defun gp/kill-all-buffers ()
   "Kills every buffer in the buffer list and then opens the scratch buffer."
