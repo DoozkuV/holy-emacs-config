@@ -1,3 +1,8 @@
+;;; BASIC INITALIZATION
+(setq user-mail-address "georgenpadron@gmail.com")
+(global-auto-revert-mode 1) ; Revert buffers when underlying file changes
+(setq global-auto-revert-non-file-buffers t) ; Revert dired and more
+
 ;;; LINE NUMBERS
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)

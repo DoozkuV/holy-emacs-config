@@ -48,7 +48,13 @@
 ;;   :hook
 ;;   ((emacs-lisp-mode lisp-mode lisp-interaction-mode) . paredit-mode))
 
+(use-package sly
+  :mode ("\\.lisp\\'" . lisp-mode)
+  :commands sly
+  :config
+  (setq inferior-lisp-program "sbcl"))
 
+;;; SNIPPETS
 (use-package yasnippet
   :diminish t
   :init
@@ -56,57 +62,3 @@
 
 (use-package yasnippet-snippets)
 
-;;; LSP CONFIGURATION
-;; We utilize the built in 'eglot' package that offers a more minimalist lsp
-;; interface while taking advantage of much of emacs's existing functionality
-(use-package eglot
-  :bind (:map eglot-mode-map
-	      ("C-c l f" . eglot-format)
-	      ("C-c l r" . eglot-rename)
-	      ("C-c l c a" . eglot-code-actions)
-	      ("C-c l c o" . eglot-code-action-organize-imports)
-	      ("C-c l c q" . eglot-code-action-quickfix)
-	      ("C-c l c e" . eglot-code-action-extract)
-	      ("C-c l c i" . eglot-code-action-inline)
-	      ("C-c l c r" . eglot-code-action-rewrite))
-  :general
-  (gp/local-leader-keys
-    :keymaps 'eglot-mode-map
-    "f" '(eglot-format :which-key "Format")
-    "r" '(eglot-rename :which-key "Eglot Rename")
-    "c" '(:ignore t :which-key "code actions")
-    "ca" '(eglot-code-actions :which-key "Code Actions")
-    "co" '(eglot-code-action-organize-imports :which-key "Organize Imports")
-    "cq" '(eglot-code-action-quickfix :which-key "Quickfix")
-    "ce" '(eglot-code-action-extract :which-key "Extract")
-    "ci" '(eglot-code-action-inline :which-key "Inline")
-    "cr" '(eglot-code-action-rewrite :which-key "Rewrite"))
-  :init
-  (dolist (mode '(c++-mode-hook
-		  c-mode-hook
-		  java-mode-hook
-		  rust-mode-hook
-		  python-mode-hook))
-    (add-hook mode 'eglot-ensure)))
-
-;; OLD LSP CONFIGURATION
-;; (use-package lsp-mode
-;;   :commands (lsp lsp-deferred)
-;;   :init
-;;   (setq read-process-output-max (* 1024 1024))
-;;   (setq lsp-use-plists t)
-;;   (setq lsp-keymap-prefix "C-c l")
-;;   :hook ((c++-mode c-mode java-mode python-mode rust-mode) . lsp-deferred)
-;;   :general
-;;   (general-def 'normal lsp-mode :definer 'minor-mode
-;;     "SPC c" lsp-command-map)
-;;   :config
-;;   ;; Determines how often lsp-mode refreshes highlights, lenses, links, etc.
-;;   (setq lsp-idle-delay 0.25)
-;;   (lsp-enable-which-key-integration t)
-;;   (add-hook 'lsp-mode-hook (lambda ()
-;; 			     (setq-local evil-lookup-func 'lsp-describe-thing-at-point))))
-
-;; (use-package lsp-ui
-;;   :commands lsp-ui-mode
-;;   :hook (lsp-mode . lsp-ui-mode))

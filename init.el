@@ -2,17 +2,13 @@
 ;; This is later dialed back at the end of the config
 (setq gc-cons-threshold (* 50 1000 1000))
 
-;;; BASIC INITALIZATION
-(setq user-mail-address "georgenpadron@gmail.com")
-(global-auto-revert-mode 1) ; Revert buffers when underlying file changes
-(setq global-auto-revert-non-file-buffers t) ; Revert dired and more
-
 ;;; USE-PACKAGE/PACKAGE MANAGER SETUP
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
 	("org" . "https://orgmode.org/elpa/")
-	("elpa" . "https://elpa.gnu.org/packages/")))
+	("elpa" . "https://elpa.gnu.org/packages/")
+	("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 (package-initialize)
 
 (setq use-package-always-ensure t)

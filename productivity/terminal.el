@@ -38,8 +38,10 @@
   :config
   (eshell-did-you-mean-setup))
 
-;; ;; Allows visual commands ran in eshell to open in vterm
-;; (use-package eshell-vterm
-;;   :after eshell
-;;   :config
-;;   (eshell-vterm-mode))
+;; Allows visual commands ran in eshell to open in vterm
+(use-package eshell-vterm
+  :load-path "external/eshell-vterm"
+  :after eshell
+  :config
+  (eshell-vterm-mode)
+  (defalias 'eshell/v 'eshell-exec-visual))

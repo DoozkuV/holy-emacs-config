@@ -19,3 +19,9 @@
   ([remap describe-variable] . helpful-variable)
   ([remap describe-key] . helpful-key)
   ([remap describe-symbol] . helpful-symbol))
+
+(use-package cheat-sh
+  :commands
+  (cheat-sh cheat-sh-help cheat-sh-list
+	    cheat-sh-region cheat-sh-search
+	    cheat-sh-maybe-region cheat-sh-search-topic))
