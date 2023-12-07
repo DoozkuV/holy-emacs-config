@@ -39,12 +39,13 @@
 (setq inhibit-splash-screen t
       initial-buffer-choice nil)
 
-;;; SCRATCH BUFFER
-(defun gp/scratch-buffer-defaults ()
-  "Setup hooks to set defaults in the scratch buffer"
-  (corfu-mode 0)
-  (auto-fill-mode 1))
-(advice-add 'scratch-buffer :after 'gp/scratch-buffer-defaults)
+;; ;;; SCRATCH BUFFER
+;; (defun gp/scratch-buffer-defaults ()
+;;   "Setup hooks to set defaults in the scratch buffer"
+;;   (corfu-mode 0)
+;;   (auto-fill-mode 1))
+;; (advice-add 'scratch-buffer :after 'gp/scratch-buffer-defaults)
+
 ;;; ELECTRIC PAIR MODE
 ;; Enable it for programming buffers 
 (dolist (mode '(prog-mode-hook
@@ -90,6 +91,12 @@
 
 ;;; DICTIONARY
 (setq dictionary-server "localhost")
+
+
+(defun gp/elfeed-tube-fetch-from-clipboard ()
+  "Runs 'elfeed-tube-fetch' on the contents of the clipboard"
+  (interactive)
+  (elfeed-tube-fetch (current-kill 0 t)))
 
 ;;; Elfeed
 (use-package elfeed

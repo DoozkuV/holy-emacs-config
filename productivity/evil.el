@@ -109,6 +109,7 @@
       "sg" '(consult-ripgrep :which-key "Search Grep")
       "sm" '(consult-man :which-key "Search Man")
       "si" '(consult-info :which-key "Search Info")
+      "sh" '(consult-history :which-key "Search History")
       "/" '(consult-line :which-key "Search By Buffer")
 
       ;; Quit
