@@ -106,7 +106,7 @@
       "s" '(:ignore t :which-key "search")
       "sr" '(consult-recent-file :which-key "Search Recent Files")
       "sb" '(consult-buffer :which-key "Search Buffers")
-      "sg" '(consult-ripgrep :which-key "Search Grep")
+      "sg" '(consult-grep :which-key "Search Grep")
       "sm" '(consult-man :which-key "Search Man")
       "si" '(consult-info :which-key "Search Info")
       "sh" '(consult-history :which-key "Search History")
