@@ -2,8 +2,17 @@
   :if (display-graphic-p))
 
 ;;; DIRED CONFIGURATION
-;; In this config we use divrish, an enhanced
-;; version of dired with ranger's functionality
+;;; Function to automatically call ripdrag on highlighted files
+;;;###autoload
+(defun gp/dired-ripdrag (&optional args)
+  "Call ripdrag on current file or all marked (or next ARG) files."
+  (interactive (list (dired-get-marked-files nil current-prefix-arg))
+	       dired-mode)
+  (let ((files (mapcar 'expand-file-name args)))
+    (apply 'call-process "ripdrag" nil nil nil files)))
+
+;; In this config we use divrish, an enhanced version of dired with
+;; ranger's functionality
 (use-package dirvish
   :general
   (gp/leader-keys
@@ -15,7 +24,8 @@
    ;; "z" 'zoxide-travel  
    "q" 'dirvish-quit
    "h" 'dired-up-directory
-   "l" 'dired-find-file)
+   "l" 'dired-find-file
+   "E" 'gp/dired-ripdrag)
   :custom
   ;; Sets the attributes that are shown on each file 
   (dirvish-attributes '(file-size file-time all-the-icons vc-state))
