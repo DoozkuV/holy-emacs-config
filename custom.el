@@ -10,7 +10,7 @@
  '(org-safe-remote-resources
    '("\\`https://en\\.wikipedia\\.org/wiki/Color_gradient#/media/File:Radial-gradient\\.svg\\'"))
  '(package-selected-packages
-   '(cheat-sh sly evil-multiedit web-mode speed-type doom-modeline elfeed-tube-mpv elfeed-tube elfeed evil-surround lua-mode lsp-ui lsp-mode evil-org all-the-icons dirvish evil-snipe evil-nerd-commenter general evil-collection evil haskell-mode ewal doom-themes smart-mode-line paredit flymake-shellcheck eglot auto-package-update auto-package-upate yasnippet-snippets markdown-mode yaml-mode dired-hide-dotfiles eshell-vterm eshell-did-you-mean eshell-syntax-highlighting hydra consult-org-roam embark-consult consult embark pdf-tools yuck-mode password-store org-roam vterm fish-mode avy go-translate helpful magit corfu which-key marginalia orderless compat vertico rainbow-delimiters))
+   '(yasnippet rust-mode cheat-sh sly evil-multiedit web-mode speed-type doom-modeline elfeed-tube-mpv elfeed-tube elfeed evil-surround lua-mode lsp-ui lsp-mode evil-org all-the-icons dirvish evil-snipe evil-nerd-commenter general evil-collection evil haskell-mode ewal doom-themes smart-mode-line paredit flymake-shellcheck eglot auto-package-update auto-package-upate yasnippet-snippets markdown-mode yaml-mode dired-hide-dotfiles eshell-vterm eshell-did-you-mean eshell-syntax-highlighting hydra consult-org-roam embark-consult consult embark pdf-tools yuck-mode password-store org-roam vterm fish-mode avy go-translate helpful magit corfu which-key marginalia orderless compat vertico rainbow-delimiters))
  '(smtpmail-smtp-server "smtp.gmail.com")
  '(smtpmail-smtp-service 25))
 (custom-set-faces

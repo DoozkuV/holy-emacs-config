@@ -28,6 +28,7 @@
 
 ;; Add in the load directory path
 (load (config-path-concat "load-directory"))
+(load-directory (config-path-concat "core"))
 (load-directory (config-path-concat "productivity"))
 (load-directory (config-path-concat "theme")) ;; Load the theme after to avoid bugginess
 
