@@ -31,7 +31,9 @@
 (load-directory (config-path-concat "core"))
 (load-directory (config-path-concat "productivity"))
 (load-directory (config-path-concat "theme")) ;; Load the theme after to avoid bugginess
-
+;; Load any additional configuration customization if it exists
+;; Otherwise, no error will be thrown
+(load (config-path-concat "config-customs.el") 1 )
 ;; Disabled commands 
 (put 'set-goal-column 'disabled nil)
 
