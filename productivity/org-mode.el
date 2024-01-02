@@ -91,7 +91,10 @@
   ;;  "C-c i" 'org-roam-node-insert)
   :config
   (setq org-roam-directory (file-truename (concat gp/org-directory "/roam")))
-  (org-roam-db-autosync-mode))
+  (org-roam-db-autosync-mode)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t))))
 
 
 ;; Org-roam integration
