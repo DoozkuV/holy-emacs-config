@@ -10,7 +10,7 @@
  '(org-safe-remote-resources
    '("\\`https://en\\.wikipedia\\.org/wiki/Color_gradient#/media/File:Radial-gradient\\.svg\\'"))
  '(package-selected-packages
-   '(cheat-sh evil-multiedit speed-type elfeed-tube-mpv elfeed-tube elfeed evil-surround lua-mode lsp-ui evil-org all-the-icons dirvish evil-snipe evil-nerd-commenter general ewal smart-mode-line paredit flymake-shellcheck eglot auto-package-update auto-package-upate dired-hide-dotfiles eshell-vterm eshell-did-you-mean eshell-syntax-highlighting hydra consult-org-roam pdf-tools yuck-mode org-roam vterm fish-mode avy go-translate helpful which-key orderless compat rainbow-delimiters))
+   '(org-roam-ui websocket cheat-sh evil-multiedit speed-type elfeed-tube-mpv elfeed-tube elfeed evil-surround lua-mode lsp-ui evil-org all-the-icons dirvish evil-snipe evil-nerd-commenter general ewal smart-mode-line paredit flymake-shellcheck eglot auto-package-update auto-package-upate dired-hide-dotfiles eshell-vterm eshell-did-you-mean eshell-syntax-highlighting hydra consult-org-roam pdf-tools yuck-mode org-roam vterm fish-mode avy go-translate helpful which-key orderless compat rainbow-delimiters))
  '(smtpmail-smtp-server "smtp.gmail.com")
  '(smtpmail-smtp-service 25))
 (custom-set-faces

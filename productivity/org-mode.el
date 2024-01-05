@@ -113,17 +113,19 @@
   ;; Display org-roam buffers right after non-org-roam buffers
   ;; in consult-buffer (and not down at the bottom)
   (consult-org-roam-buffer-after-buffers t)
-  ;; :general
-  ;; (gp/leader-keys
-  ;;   "rf" '(consult-org-roam-file-find :which-key "Node Find")
-
-  ;;   "rl" '(consult-org-roam-backlinks :which-key "Find Roam Backlinks")
-  ;;   "rL" '(consult-org-roam-forward-links :which-key "Find Roam Forward Links")
-
-  ;;   "rs" '(consult-org-roam-search :which-key "Search in Roam")
-  ;;   "rb" '(consult-org-roam-buffer :which-key "Search Roam Buffers")) 
   :config
   ;; Eventually suppress previewing for certain functions
   (consult-customize
    consult-org-roam-forward-links
    :preview-key "M-."))
+
+;; For pretty org roam ui
+(use-package websocket
+  :after org-roam)
+(use-package org-roam-ui
+  :after org-roam
+  :config
+  (setq org-roam-ui-sync-theme t
+	org-roam-ui-follow t
+	org-roam-ui-update-on-save t
+	org-roam-ui-open-on-start t))
