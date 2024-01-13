@@ -14,7 +14,7 @@
     "b" '(org-babel-tangle :which-key "Babel Tangle")
     "i" '(org-insert-link :which-key "Insert Link")
     "y" '(org-store-link :which-key "Store Link")
-    "d" '(org-deadline :which-key "Set Tags")
+    "d" '(org-deadline :which-key "Set Deadline")
     "q" '(org-set-tags-command :which-key "Set Tags")
     "e" '(org-export-dispatch :which-key "Export")
     "h" '(gp/org-toggle-emphasis-markers :which-key "Toggle Emphasis Markers")
@@ -27,7 +27,7 @@
   
   :config
   ;; Make it so org mode always starts folded
-  (setq org-startup-folded t)
+  (setq org-startup-folded 'showeverything)
   ;; Change how org folds display when minimized
   (setq org-ellipsis " ▾"
 	org-hide-emphasis-markers t)
@@ -56,12 +56,22 @@
   (setq org-capture-templates
 	`(("t" "Tasks / Projects")
 	  ("tt" "Task" entry (file+olp ,(concat gp/org-directory "/tasks.org") "Inbox")
-	   "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
-	  ("j" "Journal" entry
+	   "* TODO %?\n %U\n %i" :empty-lines 1)
+	  ("j" "Journal / Writing")
+	  ("jm" "Musings Journal" entry
+	   (file+olp+datetree ,(concat gp/org-directory "/musings.org"))
+	   "* %<%I:%M %p> - %^{Insert Name|Musing} :journal:\n\n%?\n"
+	   :clock-in :clock-resume
+	   :empty-lines 1)
+	  ("jj" "Personal Journal" entry
 	   (file+olp+datetree ,(concat gp/org-directory "/journal.org"))
 	   "* %<%I:%M %p> - Journal :journal:\n\n%?\n"
 	   :clock-in :clock-resume
 	   :empty-lines 1)))
+  ;; Load org-babel languages
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)))
   ;; Load exporting org-mode into markdown
   (require 'ox-md nil t))
 
@@ -80,7 +90,9 @@
 
     "rs" '(consult-org-roam-search :which-key "Search in Roam")
     "rb" '(consult-org-roam-buffer :which-key "Search Roam Buffers") 
-    "rc" '(org-roam-capture :which-key "Node Capture"))
+    "rc" '(org-roam-capture :which-key "Node Capture")
+
+    "rq" '(org-roam-tag-add :which-key "Add Filetags"))
 
   ;; Define a key for inserting text
   ;; Currently isn't working 
@@ -92,9 +104,10 @@
   :config
   (setq org-roam-directory (file-truename (concat gp/org-directory "/roam")))
   (org-roam-db-autosync-mode)
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((python . t))))
+  (setq org-roam-capture-templates
+	'(("d" "default" plain "%?" :target
+	   (file+head "${slug}.org" "#+title: ${title}\n")
+	   :unnarrowed t))))
 
 
 ;; Org-roam integration
