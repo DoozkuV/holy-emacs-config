@@ -57,14 +57,26 @@
 	`(("t" "Tasks / Projects")
 	  ("tt" "Task" entry (file+olp ,(concat gp/org-directory "/tasks.org") "Inbox")
 	   "* TODO %?\n %U\n %i" :empty-lines 1)
+	  ("n" "Notes")
+	  ("na" "Algorithm Notes" entry
+	   (file+olp+datetree ,(concat gp/org-directory "/notes/algorithms.org"))
+	   "* %<%I:%M %p> - CS 3250 Algorithms :notes:\n\n%?\n")
+	  ("np" "Progamming Languages Notes" entry
+	   (file+olp+datetree ,(concat gp/org-directory
+				       "/notes/programming-languages.org"))
+	   "* %<%I:%M %p> - CS 3270 Programming Languages :notes:\n\n%?\n")
+	  ("ng" "Geology Notes" entry
+	   (file+olp+datetree ,(concat gp/org-directory
+				       "/notes/geology.org"))
+	   "* %<%I:%M %p> - EES 1510 Dynamic Earth: Intro Geology :notes:\n\n%?\n")
 	  ("j" "Journal / Writing")
 	  ("jm" "Musings Journal" entry
-	   (file+olp+datetree ,(concat gp/org-directory "/musings.org"))
+	   (file+olp+datetree ,(concat gp/org-directory "/journal/musings.org"))
 	   "* %<%I:%M %p> - %^{Insert Name|Musing} :journal:\n\n%?\n"
 	   :clock-in :clock-resume
 	   :empty-lines 1)
 	  ("jj" "Personal Journal" entry
-	   (file+olp+datetree ,(concat gp/org-directory "/journal.org"))
+	   (file+olp+datetree ,(concat gp/org-directory "/journal/journal.org"))
 	   "* %<%I:%M %p> - Journal :journal:\n\n%?\n"
 	   :clock-in :clock-resume
 	   :empty-lines 1)))
@@ -92,7 +104,8 @@
     "rb" '(consult-org-roam-buffer :which-key "Search Roam Buffers") 
     "rc" '(org-roam-capture :which-key "Node Capture")
 
-    "rq" '(org-roam-tag-add :which-key "Add Filetags"))
+    "rq" '(org-roam-tag-add :which-key "Add Filetags")
+    "ru" '(org-roam-ui-open) :which-key "Open Roam UI")
 
   ;; Define a key for inserting text
   ;; Currently isn't working 

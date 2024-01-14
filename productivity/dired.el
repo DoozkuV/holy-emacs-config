@@ -9,8 +9,7 @@
   "Call ripdrag on current file or all marked (or next ARG) files."
   (interactive (list (dired-get-marked-files nil current-prefix-arg))
 	       dired-mode)
-  (let ((files (mapcar 'expand-file-name args)))
-    (apply 'call-process "ripdrag" nil nil nil files)))
+  (apply 'call-process "ripdrag" nil nil nil (mapcar 'expand-file-name args)))
 
 ;; In this config we use divrish, an enhanced version of dired with
 ;; ranger's functionality
