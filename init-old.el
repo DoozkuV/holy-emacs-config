@@ -31,7 +31,8 @@
 		eshell-mode-hook
 		vterm-mode-hook
 		term-mode-hook
-		shell-mode-hook))
+		shell-mode-hook
+		org-mode-hook))
   (add-hook mode (lambda () (electric-pair-local-mode 1))))
 
 ;;; AUTO FILL MODE

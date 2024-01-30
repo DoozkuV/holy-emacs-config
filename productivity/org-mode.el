@@ -1,9 +1,9 @@
 ;;; ORG MODE
-(defvar gp/org-directory "~/Documents/org"
-  "Directory of org files within this configuration")
-
 (use-package org
   :ensure nil
+  :preface
+  (defvar gp/org-directory "~/Documents/org"
+    "Directory of org files within this configuration")
   :hook
   (org-mode . flyspell-mode)
   :commands
@@ -14,9 +14,11 @@
     "b" '(org-babel-tangle :which-key "Babel Tangle")
     "i" '(org-insert-link :which-key "Insert Link")
     "y" '(org-store-link :which-key "Store Link")
+    "r" '(org-id-get-create :which-key "Generate ID for heading")
     "d" '(org-deadline :which-key "Set Deadline")
     "q" '(org-set-tags-command :which-key "Set Tags")
     "e" '(org-export-dispatch :which-key "Export")
+    "l" '(org-latex-preview :which-key "Preview Latex")
     "h" '(gp/org-toggle-emphasis-markers :which-key "Toggle Emphasis Markers")
     "x" '(org-toggle-checkbox :which-key "Toggle Emphasis Markers"))
   ;; Open links with the enter key
